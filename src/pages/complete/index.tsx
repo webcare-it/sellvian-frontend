@@ -83,7 +83,7 @@ export const OrderCompletePage = () => {
     return (
       <>
         <SeoWrapper title={"Order Successful!"} />
-        <BaseLayout isShowMegaMenu={false} isContainer={false}>
+        <BaseLayout isContainer={true}>
           <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
             <div className="container mx-auto px-4 py-8">
               <div className="text-center py-12">
@@ -103,7 +103,7 @@ export const OrderCompletePage = () => {
     return (
       <>
         <SeoWrapper title={"Order Successful!"} />
-        <BaseLayout isShowMegaMenu={false} isContainer={false}>
+        <BaseLayout isContainer={true}>
           <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
             <div className="container mx-auto px-4 py-8">
               <div className="text-center py-12">
@@ -122,7 +122,7 @@ export const OrderCompletePage = () => {
   return (
     <>
       <SeoWrapper title={"Order Successful!"} />
-      <BaseLayout isShowMegaMenu={false} isContainer={false}>
+      <BaseLayout>
         <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 dark:from-gray-900 dark:to-gray-800">
           <div className="container mx-auto px-4 py-8">
             <motion.div

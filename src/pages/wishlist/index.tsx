@@ -1,7 +1,9 @@
 import { BaseLayout } from "@/components/layout/base-layout";
-import { SectionTitle } from "@/components/common/section-title";
+import {
+  HomeSectionTitle,
+  SectionTitle,
+} from "@/components/common/section-title";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { WishlistItems } from "./items";
 import { BreadcrumbWrapper } from "@/components/common/breadcrumb-wrapper";
@@ -11,9 +13,9 @@ export const WishlistPublicPage = () => {
     <>
       <SeoWrapper title={"My Wishlist"} />
 
-      <BaseLayout>
+      <BaseLayout isContainer={true}>
         <section className="mb-10 md:mb-20 mt-10">
-          <SectionTitle title={"My Wishlist"} />
+          <HomeSectionTitle title={"My Wishlist"} />
 
           <WishlistItems />
         </section>

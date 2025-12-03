@@ -12,7 +12,6 @@ import { Search, MoveUpRight } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchSuggestion } from "@/api/queries/useSuggestion";
 import { useNavigate } from "react-router-dom";
-import { cn } from "@/lib/utils";
 
 interface ActionType {
   id: string;
@@ -29,7 +28,6 @@ interface SearchResultType {
 const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
   (_, ref) => {
     const navigate = useNavigate();
-
     const [query, setQuery] = useState("");
     const [result, setResult] = useState<SearchResultType | null>(null);
     const [isFocused, setIsFocused] = useState(false);
@@ -167,25 +165,21 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
     );
 
     return (
-      <div className="w-full max-w-xl mx-auto relative" ref={containerRef}>
+      <div className="w-full max-w-2xl mx-auto relative" ref={containerRef}>
         <div className="relative">
           <Input
             ref={ref || undefined}
             type="text"
-            placeholder={"Search for Products..."}
+            placeholder="Search for Products..."
             value={query}
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             onKeyDown={handleKeyDown}
-            className="pl-3 pr-9 py-1.5 h-10 md:h-11 text-base rounded-md focus-visible:ring-offset-0 w-full bg-background"
+            className="pl-3 pr-9 py-1.5 h-10 md:h-11 text-base rounded-md w-full text-foreground bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           />
 
-          <div
-            className={cn(
-              "absolute bg-primary right-0 top-1/2 -translate-y-1/2 h-full rounded-r-sm w-14",
-              isFocused && "border border-primary"
-            )}>
+          <div className="absolute bg-black right-0 top-1/2 -translate-y-1/2 h-full border border-black w-14 rounded-r-md">
             <button
               key="search"
               onClick={() =>
@@ -197,7 +191,7 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
                   type_string: "",
                 })
               }
-              className="w-full h-full flex items-center justify-center cursor-pointer">
+              className="w-full h-full flex items-center justify-center">
               <Search className="w-5 h-5 text-white" />
             </button>
           </div>
@@ -205,8 +199,7 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
           <AnimatePresence initial={false}>
             {isFocused && result && (
               <motion.div
-                style={{ zIndex: 1000 }}
-                className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-md shadow-lg overflow-hidden"
+                className="absolute z-50 top-full left-0 right-0 bg-gray-100 mt-1 overflow-hidden rounded-md"
                 variants={container}
                 initial="hidden"
                 animate="show"
@@ -216,7 +209,7 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
                     result?.actions?.map((action: ActionType) => (
                       <motion.li
                         key={action?.id}
-                        className="px-3 py-2 flex items-center justify-between hover:bg-accent cursor-pointer"
+                        className="px-3 py-2 flex items-center justify-between hover:bg-white cursor-pointer"
                         variants={item}
                         layout
                         onClick={() => handleSearch(action)}>
@@ -239,4 +232,4 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
 
 ActionSearchBarComponent.displayName = "ActionSearchBar";
 
-export const ActionSearchBar = memo(ActionSearchBarComponent);
+export const SearchAction = memo(ActionSearchBarComponent);

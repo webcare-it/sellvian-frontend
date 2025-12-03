@@ -15,8 +15,7 @@ import type {
   CategoryType,
   SubCategoryType,
   SubSubCategoryType,
-} from "@/components/layout/header/useMenu";
-
+} from "../layout/sidebar";
 interface Props {
   categories: CategoryType[];
   isLoading: boolean;

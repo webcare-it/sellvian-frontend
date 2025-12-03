@@ -42,7 +42,7 @@ export const ProductDetailsPage = () => {
   return (
     <>
       <ProductDetailsSeo product={product} />
-      <BaseLayout>
+      <BaseLayout isContainer={true}>
         <BreadcrumbWrapper
           className="my-10 mx-4 md:mx-auto"
           items={[

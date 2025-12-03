@@ -102,7 +102,7 @@ export const FlashDealPage = () => {
                 <div className="mx-2">
                   <ImageWithLink
                     item={{ image: flashDeal?.banner, link: "" }}
-                  />{" "}
+                  />
                 </div>
                 <div className="flex justify-center mt-6">
                   <h2 className="text-lg line-clamp-1 font-bold md:text-3xl lg:text-4xl text-primary tracking-tight flex text-center">

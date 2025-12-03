@@ -27,7 +27,7 @@ export const ProductsPage = () => {
   return (
     <>
       <SeoWrapper title={"All Products"} />
-      <BaseLayout>
+      <BaseLayout isContainer={true}>
         <div className="flex items-center justify-between mt-8 md:mt-10 mb-4">
           <SectionTitle title={"All Products"} className="" />
           <FilterProduct filters={filters} setFilters={setFilters} />

@@ -1,6 +1,6 @@
 import { useGetProductsForHome } from "@/api/queries/useProducts";
 import type { ProductType } from "@/type";
-import { SectionTitle } from "@/components/common/section-title";
+import { HomeSectionTitle } from "@/components/common/section-title";
 import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { useSearchParams } from "react-router-dom";
@@ -24,9 +24,9 @@ export const SearchPage = () => {
     <>
       <SeoWrapper title={`Search results for "${query?.toUpperCase()}"`} />
 
-      <BaseLayout>
+      <BaseLayout isContainer={true}>
         <section className="mb-10 md:mb-20 container mx-auto mt-10">
-          <SectionTitle
+          <HomeSectionTitle
             title={`Search results for "${query?.toUpperCase()}"`}
           />
           <CardLayout>

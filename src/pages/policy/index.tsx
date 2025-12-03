@@ -27,7 +27,7 @@ export const PolicyPage = () => {
   return (
     <>
       <SeoWrapper title={info?.meta_title || info?.title || `Policy ${key}`} />
-      <BaseLayout isShowMegaMenu={false}>
+      <BaseLayout isContainer={true}>
         <div className="my-10 md:my-16">
           {isLoading ? (
             <div className="flex flex-col gap-4">
@@ -38,13 +38,12 @@ export const PolicyPage = () => {
           ) : info?.content ? (
             <article>
               <SectionTitle title={info?.title || `Policy ${key}`} />
-              <div
-                className=""
-                dangerouslySetInnerHTML={{ __html: info?.content || "" }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: info?.content || "" }} />
             </article>
           ) : (
-            <NoDataFound title={"No policy found"} />
+            <div className="mx-4 md:mx-5">
+              <NoDataFound title={"No policy found"} />
+            </div>
           )}
         </div>
       </BaseLayout>

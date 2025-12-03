@@ -6,7 +6,7 @@ import { SeoWrapper } from "@/components/common/seo-wrapper";
 import { useCategories } from "@/api/queries/useCategories";
 import { CategoryCard, CategoryCardSkeleton } from "@/components/card/category";
 import { MobileCategory } from "@/components/card/mobile-category";
-import type { CategoryType } from "@/components/layout/header/useMenu";
+import type { CategoryType } from "@/components/layout/sidebar";
 
 export const CategoriesPage = () => {
   const { data, isLoading } = useCategories();

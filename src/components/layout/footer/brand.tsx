@@ -1,6 +1,6 @@
+import { slugify } from "@/helper";
 import type { BrandType } from "@/type";
 import { Link, useLocation } from "react-router-dom";
-import { slugify } from "@/helper";
 import { Skeleton } from "@/components/common/skeleton";
 import { useGetTopBrands } from "@/api/queries/useAllBrands";
 
@@ -11,7 +11,7 @@ export const BrandFooter = () => {
 
   return (
     <div>
-      <h4 className="text-white font-bold text-lg mb-4">Top Brands</h4>
+      <h4 className="text-foreground font-bold text-lg mb-4">Top Brands</h4>
       <ul className="space-y-2">
         {isLoading ? (
           Array.from({ length: 7 }).map((_, i) => (

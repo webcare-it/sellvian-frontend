@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { getImageUrl, slugify } from "@/helper";
 import { useCategories } from "@/api/queries/useCategories";
 import { Skeleton } from "@/components/common/skeleton";
+import { Placeholder } from "@/components/common/placeholder";
 
 export type CategoryType = {
   id: number;
@@ -188,6 +189,28 @@ export const Sidebar = () => {
     }
   }, [navigate, pathSegments]);
 
+  const AllProducts = useCallback(() => {
+    const handleClick = () => {
+      navigate("/products");
+    };
+    return (
+      <button
+        onClick={handleClick}
+        className={`flex flex-col items-center p-4 cursor-pointer transition-all duration-200 hover:bg-primary/5 ${
+          pathname === "/products" ? "bg-primary/5" : ""
+        }`}>
+        <img
+          src={"/all-product.png"}
+          alt={"All Products"}
+          className="w-10 h-10 object-contain mb-2 overflow-hidden"
+        />
+        <span className="text-sm font-medium text-foreground text-center line-clamp-2">
+          All Products
+        </span>
+      </button>
+    );
+  }, [navigate, pathname]);
+
   const CategoryItem = useCallback(
     ({ category }: { category: CategoryType }) => {
       const isActive =
@@ -199,13 +222,16 @@ export const Sidebar = () => {
             isActive ? "bg-primary/5" : ""
           }`}
           onClick={() => handleMainCategoryClick(category)}>
-          <img
-            src={
-              category?.icon ? getImageUrl(category?.icon) : "/placeholder.svg"
-            }
-            alt={category?.name}
-            className="w-10 h-10 object-contain mb-2 overflow-hidden"
-          />
+          {category?.icon ? (
+            <img
+              src={getImageUrl(category?.icon)}
+              alt={category?.name}
+              className="w-10 h-10 object-contain mb-2 overflow-hidden"
+            />
+          ) : (
+            <Placeholder className="w-10 h-10" />
+          )}
+
           <span className="text-sm font-medium text-foreground text-center line-clamp-2">
             {category?.name}
           </span>
@@ -231,15 +257,16 @@ export const Sidebar = () => {
           }`}
           onClick={() => handleSubCategoryClick(subCategory)}>
           <div className="flex items-center gap-2">
-            <img
-              src={
-                subCategory?.icon
-                  ? getImageUrl(subCategory?.icon)
-                  : "/placeholder.svg"
-              }
-              alt={subCategory?.name}
-              className="w-8 h-8 object-contain flex-shrink-0 overflow-hidden"
-            />
+            {subCategory?.icon ? (
+              <img
+                src={getImageUrl(subCategory?.icon)}
+                alt={subCategory?.name}
+                className="w-8 h-8 object-contain flex-shrink-0 overflow-hidden"
+              />
+            ) : (
+              <Placeholder className="w-8 h-8" />
+            )}
+
             <span className="text-sm font-medium text-foreground line-clamp-1 text-ellipsis">
               {subCategory?.name}
             </span>
@@ -268,15 +295,16 @@ export const Sidebar = () => {
           }`}
           onClick={() => handleSubSubCategoryClick(subSubCategory)}>
           <div className="flex items-center gap-2">
-            <img
-              src={
-                subSubCategory?.icon
-                  ? getImageUrl(subSubCategory?.icon)
-                  : "/placeholder.svg"
-              }
-              alt={subSubCategory?.name}
-              className="w-8 h-8 object-contain flex-shrink-0 overflow-hidden"
-            />
+            {subSubCategory?.icon ? (
+              <img
+                src={getImageUrl(subSubCategory?.icon)}
+                alt={subSubCategory?.name}
+                className="w-8 h-8 object-contain flex-shrink-0 overflow-hidden"
+              />
+            ) : (
+              <Placeholder className="w-8 h-8" />
+            )}
+
             <span className="text-sm font-medium text-foreground line-clamp-1 text-ellipsis">
               {subSubCategory?.name}
             </span>
@@ -322,6 +350,7 @@ export const Sidebar = () => {
             <div>
               {currentView === "main" && (
                 <div className="grid grid-cols-2">
+                  <AllProducts />
                   {categories?.map((category) => (
                     <CategoryItem key={category?.id} category={category} />
                   ))}

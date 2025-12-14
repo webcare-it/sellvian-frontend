@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useGetCampaignSummaryQuery } from "@/api/queries/useGetCart";
-
 import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
 import { getConfig, getImageUrl } from "@/helper";

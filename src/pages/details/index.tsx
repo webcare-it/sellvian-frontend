@@ -94,7 +94,7 @@ export const ProductDetailsPage = () => {
 
 export const ProductDetailsSkeleton = () => {
   return (
-    <BaseLayout>
+    <BaseLayout isContainer={true}>
       <div className="my-10 mx-4 md:mx-auto">
         <div className="flex items-center gap-2">
           <Skeleton className="h-4 w-16" />

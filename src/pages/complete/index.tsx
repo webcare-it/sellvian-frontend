@@ -3,7 +3,6 @@ import { BaseLayout } from "@/components/layout/base-layout";
 import { Skeleton } from "@/components/common/skeleton";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
-
 import { useGetOrderSuccessful } from "@/api/queries/userOrders";
 import type { InvoiceType } from "@/type";
 import {
@@ -93,6 +92,7 @@ export const OrderCompletePage = () => {
               </div>
               <OrderDetailsSkeleton />
             </div>
+            <FlowerAnimation />
           </div>
         </BaseLayout>
       </>
@@ -155,8 +155,31 @@ export const OrderCompletePage = () => {
 
             <OrderDetailsCard order={order} path="/track-order" />
           </div>
+          <FlowerAnimation />
         </div>
       </BaseLayout>
     </>
+  );
+};
+
+const FlowerAnimation = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {[...Array(100)].map((_, i) => (
+        <img
+          key={i}
+          src="/flower.png"
+          alt="flower"
+          className="absolute w-10 h-10 animate-fall"
+          style={{
+            animationDuration: `${Math.random() * 5 + 3}s`,
+            animationDelay: `${Math.random() * 5}s`,
+            left: `${Math.random() * 100}%`,
+            top: `-${Math.random() * 20}vh`,
+            transform: `rotate(${Math.random() * 360}deg)`,
+          }}
+        />
+      ))}
+    </div>
   );
 };

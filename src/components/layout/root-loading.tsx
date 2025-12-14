@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { Skeleton } from "../common/skeleton";
 import { Input } from "../ui/input";
 
@@ -60,7 +61,7 @@ const BannerLoading = () => {
 export const RootPageLoading = () => {
   return (
     <main className="min-h-screen flex flex-col">
-      <header className="h-16 bg-[#b41e1b] container mx-auto flex items-center w-full px-1 md:px-0 justify-between">
+      <header className="h-16 container mx-auto flex items-center w-full px-1 md:px-0 justify-between">
         <Skeleton className="w-40 h-10" />
 
         <div className="w-full hidden md:block max-w-xl mx-auto relative">
@@ -68,13 +69,21 @@ export const RootPageLoading = () => {
             <Input
               type="text"
               placeholder="Search for Products..."
-              className="pl-3 pr-9 py-1.5 h-10 md:h-11 text-base rounded-md focus-visible:ring-offset-0 w-full bg-background"
+              className="pl-3 pr-9 py-1.5 h-10 md:h-11 text-base rounded-md w-full text-foreground bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             />
+            <div className="absolute bg-black right-0 top-1/2 -translate-y-1/2 h-full border border-black w-14 rounded-r-md">
+              <button
+                key="search"
+                className="w-full h-full flex items-center justify-center cursor-pointer">
+                <Search className="w-5 h-5 text-white" />
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
+          <Skeleton className="w-24 h-9 md:h-10 rounded-lg" />
           {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton key={index} className="w-8 h-8 rounded" />
+            <Skeleton key={index} className="size-9 md:size-10 rounded-full" />
           ))}
         </div>
       </header>

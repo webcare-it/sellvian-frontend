@@ -13,6 +13,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { BrandFooter } from "./brand";
+import { SubscribeFooter } from "./subscriber";
 
 export const Footer = () => {
   const config = useConfig();
@@ -22,6 +23,7 @@ export const Footer = () => {
 
   return (
     <>
+      <SubscribeFooter />
       <div className="bg-primary/5 text-foreground pb-[53px] md:pb-0 mt-10 md:mt-20">
         <Separator className="bg-primary py-1 w-full" />
         <div className="container mx-auto px-4">

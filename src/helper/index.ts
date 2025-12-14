@@ -1,4 +1,4 @@
-import { IMAGE_URL } from "@/constant";
+import { IMAGE_URL } from "../constant";
 import type { ConfigType } from "@/hooks/useConfig";
 import type {
   ProductDetailsType,

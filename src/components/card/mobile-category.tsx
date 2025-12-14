@@ -16,6 +16,7 @@ import type {
   SubCategoryType,
   SubSubCategoryType,
 } from "../layout/sidebar";
+
 interface Props {
   categories: CategoryType[];
   isLoading: boolean;

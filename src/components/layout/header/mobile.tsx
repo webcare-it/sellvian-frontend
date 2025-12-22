@@ -22,14 +22,26 @@ import { TrackIcon } from "./desktop";
 export const HeaderMobile = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [triggerAnimation, setTriggerAnimation] = useState(false);
 
   const handleSearchClick = () => {
     setIsSearchOpen(true);
+    setTriggerAnimation(true);
   };
 
   const handleBackClick = () => {
     setIsSearchOpen(false);
+    setTriggerAnimation(true);
   };
+
+  useEffect(() => {
+    if (triggerAnimation) {
+      const timer = setTimeout(() => {
+        setTriggerAnimation(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [triggerAnimation]);
 
   const searchBar = useMemo(() => {
     return (
@@ -50,43 +62,64 @@ export const HeaderMobile = () => {
   return (
     <nav
       className={`md:hidden py-1 bg-primary backdrop-blur-3xl sticky top-0 left-0 right-0 z-[60]`}>
-      <AnimatePresence mode="wait">
-        {!isSearchOpen ? (
-          <motion.div
-            key="logo-section"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex items-center justify-between px-4">
-            <div>
-              <Logo type="MOBILE" />
-            </div>
-            <div className="flex justify-end items-center gap-4">
-              <Link to="/track-order">
-                <TrackIcon height="20px" width="30px" />
-              </Link>
-              <button onClick={handleSearchClick}>
-                <Search className="h-6 w-6 text-white font-bold" />
-              </button>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="search-section"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex items-center justify-between px-2 gap-2">
-            <ArrowLeft
-              onClick={handleBackClick}
-              className="h-6 w-6 text-white"
-            />
-            {searchBar}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {triggerAnimation ? (
+        <AnimatePresence mode="wait">
+          {!isSearchOpen ? (
+            <motion.div
+              key="logo-section"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex items-center justify-between px-4">
+              <div>
+                <Logo type="MOBILE" />
+              </div>
+              <div className="flex justify-end items-center gap-4">
+                <Link to="/track-order">
+                  <TrackIcon height="20px" width="30px" />
+                </Link>
+                <button onClick={handleSearchClick}>
+                  <Search className="h-6 w-6 text-white font-bold" />
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="search-section"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex items-center justify-between px-2 gap-2">
+              <ArrowLeft
+                onClick={handleBackClick}
+                className="h-6 w-6 text-white"
+              />
+              {searchBar}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      ) : !isSearchOpen ? (
+        <div className="flex items-center justify-between px-4">
+          <div>
+            <Logo type="MOBILE" />
+          </div>
+          <div className="flex justify-end items-center gap-4">
+            <Link to="/track-order">
+              <TrackIcon height="20px" width="30px" />
+            </Link>
+            <button onClick={handleSearchClick}>
+              <Search className="h-6 w-6 text-white font-bold" />
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-between px-2 gap-2">
+          <ArrowLeft onClick={handleBackClick} className="h-6 w-6 text-white" />
+          {searchBar}
+        </div>
+      )}
     </nav>
   );
 };
@@ -130,7 +163,12 @@ export const FooterMobile = () => {
             <div className="bg-primary border-2 border-white rounded-full p-2 -mt-8 mb-1">
               <Handbag className="h-8 w-8 text-white" />
             </div>
-            <span className="text-[10px] text-foreground font-medium">
+            <span
+              className={`text-[10px] font-medium ${
+                isPathActive(location.pathname, "/cart")
+                  ? "text-primary"
+                  : "text-foreground"
+              }`}>
               Cart ({cart?.length})
             </span>
           </Link>

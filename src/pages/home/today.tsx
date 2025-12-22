@@ -3,7 +3,6 @@ import type { HomePropsType } from "@/type";
 import { ProductSection } from "@/components/common/product-section";
 
 export const TodaysDealSection = ({ isLoading, products }: HomePropsType) => {
-  console.log({ products });
   return (
     <section
       className={`container mx-auto ${

@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { useGetCampaignSummaryQuery } from "@/api/queries/useGetCart";
 import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
-import { getConfig, getImageUrl } from "@/helper";
+import { getConfig } from "@/helper";
 import { useConfig } from "@/hooks/useConfig";
 import { cn } from "@/lib/utils";
 import { Coupon } from "@/components/card/coupon";
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useCampaignRemoveCart } from "@/controllers/campaignController";
 import type { StateSyncType } from "@/type";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface CartSummaryType {
   sub_total: string;
@@ -41,7 +42,7 @@ export const CampaignCartSummary = ({ children }: Props) => {
 
   return (
     <Card className={cn("p-4 md:p-6 md:sticky md:top-28 bg-card")}>
-      <h2 className="text-xl font-bold text-foreground">{"ORDER SUMMERY"}</h2>
+      <h2 className="text-xl font-bold text-foreground">ORDER SUMMERY</h2>
 
       {campaign?.length > 0 ? (
         <div className="flex flex-col gap-2">
@@ -51,12 +52,8 @@ export const CampaignCartSummary = ({ children }: Props) => {
               className="flex justify-between items-center border-b pb-2">
               <div className="flex gap-1">
                 <div className="flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 relative rounded-lg border overflow-hidden">
-                  <img
-                    src={
-                      item?.image
-                        ? getImageUrl(item?.image)
-                        : "/placeholder.svg"
-                    }
+                  <OptimizedImage
+                    src={item?.image || ""}
                     alt={item?.name}
                     className="absolute w-full h-full object-cover"
                   />
@@ -94,8 +91,8 @@ export const CampaignCartSummary = ({ children }: Props) => {
               <span className="text-2xl font-bold">!</span>
             </div>
             <div className="flex flex-col items-center text-foreground text-sm md:text-base">
-              <span className="font-medium">{"No Items"}</span>
-              <span>{"Add items to cart"}</span>
+              <span className="font-medium">No Items</span>
+              <span>Add items to cart</span>
             </div>
           </div>
         </div>
@@ -105,37 +102,35 @@ export const CampaignCartSummary = ({ children }: Props) => {
 
       <div className="space-y-1 md:space-y-3">
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Sub Total"}:</span>
+          <span className="text-muted-foreground">Sub Total:</span>
           <span className="font-medium">
-            {cartSummary?.sub_total || " ৳00.00"}
+            {cartSummary?.sub_total || "৳00.00"}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Shipping Cost"}:</span>
+          <span className="text-muted-foreground">Shipping Cost:</span>
           <span className="font-medium">
-            {cartSummary?.shipping_cost || " ৳00.00"}
+            {cartSummary?.shipping_cost || "৳00.00"}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{"Discount"}:</span>
+          <span className="text-muted-foreground">Discount:</span>
           <span className="text-green-600 font-semibold">
-            {cartSummary?.discount || " ৳00.00"}
+            {cartSummary?.discount || "৳00.00"}
           </span>
         </div>
 
         <div className="flex justify-between">
-          <span className="text-muted-foreground">
-            {"Estimated sales tax"}:
-          </span>
-          <span className="font-medium">{cartSummary?.tax || " ৳00.00"}</span>
+          <span className="text-muted-foreground">Estimated sales tax:</span>
+          <span className="font-medium">{cartSummary?.tax || "৳00.00"}</span>
         </div>
       </div>
 
       <Separator />
 
       <div className="flex justify-between text-lg font-bold">
-        <span>{"Total Amount"}</span>
-        <span>{cartSummary?.grand_total || " ৳00.00"}</span>
+        <span>Total Amount</span>
+        <span>{cartSummary?.grand_total || "৳00.00"}</span>
       </div>
 
       {children}

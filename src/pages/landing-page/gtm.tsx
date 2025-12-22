@@ -41,14 +41,14 @@ export const GtmSeo = ({ info }: { info: LandingPageType }) => {
   return (
     <Helmet>
       <title>
-        {info?.name} - {siteName}
+        {info?.name} | {siteName}
       </title>
       <meta
         name="description"
         content={truncateText(info?.sub_title || "")}
         title={info?.name}
       />
-      {/* <meta name="keywords" content={info?.tags?.join(", ")} /> */}
+
       <meta property="og:image" content={getImageUrl(img)} />
       <meta property="og:title" content={info?.title} />
       <meta

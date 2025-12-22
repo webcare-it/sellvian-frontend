@@ -60,7 +60,7 @@ const BannerLoading = () => {
 
 export const RootPageLoading = () => {
   return (
-    <main className="min-h-screen flex flex-col">
+    <section className="min-h-screen flex flex-col">
       <header className="h-16 container mx-auto flex items-center w-full px-1 md:px-0 justify-between">
         <Skeleton className="w-40 h-10" />
 
@@ -81,7 +81,7 @@ export const RootPageLoading = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
-          <Skeleton className="w-24 h-9 md:h-10 rounded-lg" />
+          <Skeleton className=" hidden md:block w-24 h-9 md:h-10 rounded-lg" />
           {Array.from({ length: 3 }).map((_, index) => (
             <Skeleton key={index} className="size-9 md:size-10 rounded-full" />
           ))}
@@ -102,7 +102,7 @@ export const RootPageLoading = () => {
           </div>
         </aside>
 
-        <main className={`flex-1 overflow-y-auto ml-0 md:ml-80 bg-white`}>
+        <section className={`flex-1 overflow-y-auto ml-0 md:ml-80 bg-white`}>
           <section className="container mx-auto">
             <section className="flex flex-col gap-10 md:gap-20">
               <BannerLoading />
@@ -143,7 +143,7 @@ export const RootPageLoading = () => {
               </div>
             </div>
           </footer>
-        </main>
+        </section>
       </section>
 
       <footer className="md:hidden border-t">
@@ -158,6 +158,6 @@ export const RootPageLoading = () => {
           </div>
         </div>
       </footer>
-    </main>
+    </section>
   );
 };

@@ -8,6 +8,11 @@ import { AnimationWrapper } from "@/components/common/animation-wrapper";
 import { NoDataFound } from "@/components/common/no-data-found";
 import { BaseLayout } from "@/components/layout/base-layout";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
+import { useState } from "react";
+import {
+  PaginationWrapper,
+  type PaginationDataType,
+} from "@/components/common/pagination-wrapper";
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -16,9 +21,20 @@ export const SearchPage = () => {
   const query = searchParams.get("query") || "";
   const params = { query_key: query, ...(type.trim() ? { type } : {}) };
 
-  const { data, isLoading } = useGetProductsForHome("search", params);
+  const [filters, setFilters] = useState<Record<string, unknown>>({ page: 1 });
+
+  const { data, isLoading } = useGetProductsForHome("search", {
+    ...params,
+    ...filters,
+  });
 
   const products = (data?.data as ProductType[]) || [];
+  const pagination = (data as { meta: PaginationDataType })?.meta || {};
+
+  const handlePageChange = (page: number) => {
+    setFilters((prev) => ({ ...prev, page }));
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -51,6 +67,12 @@ export const SearchPage = () => {
               </div>
             )}
           </CardLayout>
+          {Object.keys(pagination)?.length > 0 && products?.length > 0 && (
+            <PaginationWrapper
+              paginationData={pagination}
+              onPageChange={handlePageChange}
+            />
+          )}
         </section>
       </BaseLayout>
     </>

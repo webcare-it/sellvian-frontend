@@ -9,7 +9,7 @@ export const LandingSkeleton = () => {
         </div>
       </div>
 
-      <section className="container mx-auto px-4 sm:px-0 space-y-10 md:space-y-16">
+      <section className="max-w-[1530px] mx-auto px-4 sm:px-0 space-y-10 md:space-y-16">
         <div className="space-y-4">
           <Skeleton className="h-12 w-3/4 mx-auto rounded-lg" />
           <Skeleton className="h-8 w-1/2 mx-auto rounded-lg" />

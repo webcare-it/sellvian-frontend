@@ -3,16 +3,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { LandingVariantCard } from "./variant";
 import type { LandingPageType } from "./type";
-import { getImageUrl, getVariant } from "@/helper";
+import { getVariant } from "@/helper";
 import type { ProductDetailsType, ProductType, StateSyncType } from "@/type";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
-
 import { useCampaignAddToCart } from "@/controllers/campaignController";
 import { useGetCampaignCartQuery } from "@/api/queries/useGetCart";
 import { setCartItemsCampaign } from "@/redux/slice/campaignSlice";
 import { useGtmTracker, type PurchaseTrackerType } from "@/hooks/useGtmTracker";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { OptimizedImage } from "@/components/common/optimized-image";
 
 interface Props {
   info: LandingPageType;
@@ -65,13 +65,17 @@ export const ProductSection = ({ info }: Props) => {
 
   return (
     <section id="order-section" ref={ref}>
-      <Title>{"Choose Your Favorite Products"}</Title>
+      {products?.length > 0 ? (
+        <>
+          <Title>Choose Your Favorite Products</Title>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {products?.map((product) => (
-          <SingleProduct key={product.id} product={product} />
-        ))}
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {products?.map((product) => (
+              <SingleProduct key={product.id} product={product} />
+            ))}
+          </div>
+        </>
+      ) : null}
     </section>
   );
 };
@@ -129,8 +133,8 @@ const SingleProduct = ({ product }: { product: ProductDetailsType }) => {
       )}>
       <div className="flex items-start gap-2 md:gap-4">
         <div className="relative min-h-[140px] max-h-[200px] w-24 md:w-32 overflow-hidden rounded-lg">
-          <img
-            src={getImageUrl(product?.thumbnail_image) || "/placeholder.svg"}
+          <OptimizedImage
+            src={product?.thumbnail_image || ""}
             alt={product?.name}
             className="absolute w-full h-full object-cover"
           />

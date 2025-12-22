@@ -9,6 +9,7 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 import { useGetCart } from "@/controllers/cartController";
 import { useGetWishlist } from "@/controllers/wishlistController";
+import nprogress from "nprogress";
 
 export const BaseLayout = ({
   children,
@@ -28,9 +29,13 @@ export const BaseLayout = ({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+  useEffect(() => {
+    nprogress.start();
+    nprogress.done();
+  }, [location.pathname]);
 
   return (
-    <main className="min-h-screen flex flex-col">
+    <section className="min-h-screen flex flex-col">
       <header
         className={`bg-primary text-white ${
           isSticky ? "sticky top-0 z-50" : ""
@@ -43,7 +48,7 @@ export const BaseLayout = ({
           <Sidebar />
         </aside>
 
-        <main className={`flex-1 overflow-y-auto ml-0 md:ml-80 bg-white`}>
+        <section className={`flex-1 overflow-y-auto ml-0 md:ml-80 bg-white`}>
           <section
             className={`${className ? className : ""} ${
               isContainer ? "container mx-auto" : ""
@@ -51,13 +56,13 @@ export const BaseLayout = ({
             {children}
           </section>
           <Footer />
-        </main>
+        </section>
       </section>
       <footer>
         <FooterMobile />
       </footer>
 
       <ScrollToTop />
-    </main>
+    </section>
   );
 };

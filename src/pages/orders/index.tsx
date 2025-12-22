@@ -36,7 +36,7 @@ export const OrdersPage = () => {
   };
 
   const orders = (data?.data as OrderType[]) || [];
-  const pagination = (data as { meta: PaginationDataType })?.meta;
+  const pagination = (data as { meta: PaginationDataType })?.meta || {};
 
   return (
     <>
@@ -149,13 +149,14 @@ export const OrdersPage = () => {
               <TableRow className="w-full">
                 <TableCell colSpan={7}>
                   <div className="w-full flex justify-end">
-                    {pagination && (
-                      <PaginationWrapper
-                        className=""
-                        paginationData={pagination}
-                        onPageChange={handlePageChange}
-                      />
-                    )}
+                    {Object.keys(pagination)?.length > 0 &&
+                      orders?.length > 0 && (
+                        <PaginationWrapper
+                          className=""
+                          paginationData={pagination}
+                          onPageChange={handlePageChange}
+                        />
+                      )}
                   </div>
                 </TableCell>
               </TableRow>

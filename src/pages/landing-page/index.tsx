@@ -22,7 +22,6 @@ import type { LandingPageType } from "./type";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LandingSkeleton } from "./skeleton";
-
 import { GtmSeo } from "./gtm";
 import { useEffect } from "react";
 import { removeLocalStorage } from "@/helper";
@@ -46,12 +45,12 @@ export const LandingPage = () => {
   return (
     <>
       <GtmSeo info={info} />
-      <main className="min-h-screen overflow-hidden">
+      <section className="min-h-screen overflow-hidden">
         <HeaderSection />
-        <section className="container mx-auto px-4 sm:px-0 space-y-10 md:space-y-16">
+        <section className="max-w-[1530px] mx-auto px-4 sm:px-0 space-y-10 md:space-y-16">
           <div>
             <Title>{info?.title}</Title>
-            <SubTitle>{info?.sub_title}</SubTitle>
+            {info?.sub_title && <SubTitle>{info?.sub_title}</SubTitle>}
           </div>
 
           <VideoSection info={info} />
@@ -77,7 +76,7 @@ export const LandingPage = () => {
         <FooterLanding />
 
         <ScrollToTop />
-      </main>
+      </section>
     </>
   );
 };

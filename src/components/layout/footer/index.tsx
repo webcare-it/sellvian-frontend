@@ -30,17 +30,14 @@ export const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pt-8">
             <div>
               <h2 className="w-full h-12 relative overflow-hidden mb-4">
-                {logo?.length > 0 ? (
-                  <img
-                    className="absolute w-full h-full object-contain"
-                    src={getImageUrl(logo as string)}
-                    alt="logo"
-                  />
-                ) : (
-                  <div className="absolute w-full h-full flex items-center justify-center">
-                    <Image className="w-6 h-6 text-primary" />
-                  </div>
-                )}
+                <img
+                  className="absolute w-full h-full object-contain"
+                  src={getImageUrl(logo as string)}
+                  alt="logo"
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder.svg";
+                  }}
+                />
               </h2>
               {description && (
                 <div

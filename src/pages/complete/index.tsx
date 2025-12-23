@@ -18,6 +18,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   getLocalStorage,
   removeCurrencySymbol,
+  removeLocalStorage,
   setLocalStorage,
 } from "@/helper";
 
@@ -30,6 +31,7 @@ export const OrderCompletePage = () => {
   const order = useMemo(() => (data?.invoice as InvoiceType) || {}, [data]);
 
   useEffect(() => {
+    removeLocalStorage("selected_shipping_method");
     if (!ip) {
       fetch("https://api.ipify.org?format=json")
         .then((res) => res?.json())
@@ -44,7 +46,7 @@ export const OrderCompletePage = () => {
         coupon: order?.coupon || "",
         tax: removeCurrencySymbol(order?.tax?.toString() || "0"),
         shipping: removeCurrencySymbol(order?.shipping_cost?.toString() || "0"),
-        value: removeCurrencySymbol(order?.grand_total?.toString() || "0") || 0,
+        value: removeCurrencySymbol(order?.subtotal?.toString() || "0") || 0,
         customer_type:
           (order?.customer_type?.toLowerCase() as "new" | "returning") || "new",
         items: order?.order_items?.map((item) => ({
@@ -82,8 +84,8 @@ export const OrderCompletePage = () => {
     return (
       <>
         <SeoWrapper title={"Order Successful!"} />
-        <BaseLayout isContainer={true}>
-          <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+        <BaseLayout isShowMegaMenu={false} isContainer={false}>
+          <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative">
             <div className="container mx-auto px-4 py-8">
               <div className="text-center py-12">
                 <Skeleton className="h-20 w-20 mx-auto rounded-full mb-6" />
@@ -92,6 +94,7 @@ export const OrderCompletePage = () => {
               </div>
               <OrderDetailsSkeleton />
             </div>
+
             <FlowerAnimation />
           </div>
         </BaseLayout>
@@ -103,7 +106,7 @@ export const OrderCompletePage = () => {
     return (
       <>
         <SeoWrapper title={"Order Successful!"} />
-        <BaseLayout isContainer={true}>
+        <BaseLayout isShowMegaMenu={false} isContainer={false}>
           <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
             <div className="container mx-auto px-4 py-8">
               <div className="text-center py-12">
@@ -122,8 +125,8 @@ export const OrderCompletePage = () => {
   return (
     <>
       <SeoWrapper title={"Order Successful!"} />
-      <BaseLayout>
-        <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 dark:from-gray-900 dark:to-gray-800">
+      <BaseLayout isShowMegaMenu={false} isContainer={false}>
+        <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 relative">
           <div className="container mx-auto px-4 py-8">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -155,6 +158,7 @@ export const OrderCompletePage = () => {
 
             <OrderDetailsCard order={order} path="/track-order" />
           </div>
+
           <FlowerAnimation />
         </div>
       </BaseLayout>

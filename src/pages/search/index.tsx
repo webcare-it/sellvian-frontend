@@ -1,6 +1,6 @@
 import { useGetProductsForHome } from "@/api/queries/useProducts";
 import type { ProductType } from "@/type";
-import { HomeSectionTitle } from "@/components/common/section-title";
+import { SectionTitle } from "@/components/common/section-title";
 import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { useSearchParams } from "react-router-dom";
@@ -8,11 +8,11 @@ import { AnimationWrapper } from "@/components/common/animation-wrapper";
 import { NoDataFound } from "@/components/common/no-data-found";
 import { BaseLayout } from "@/components/layout/base-layout";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
-import { useState } from "react";
 import {
   PaginationWrapper,
   type PaginationDataType,
 } from "@/components/common/pagination-wrapper";
+import { useState } from "react";
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,7 +20,6 @@ export const SearchPage = () => {
   const type = searchParams.get("type") || "";
   const query = searchParams.get("query") || "";
   const params = { query_key: query, ...(type.trim() ? { type } : {}) };
-
   const [filters, setFilters] = useState<Record<string, unknown>>({ page: 1 });
 
   const { data, isLoading } = useGetProductsForHome("search", {
@@ -40,9 +39,9 @@ export const SearchPage = () => {
     <>
       <SeoWrapper title={`Search results for "${query?.toUpperCase()}"`} />
 
-      <BaseLayout isContainer={true}>
+      <BaseLayout>
         <section className="mb-10 md:mb-20 container mx-auto mt-10">
-          <HomeSectionTitle
+          <SectionTitle
             title={`Search results for "${query?.toUpperCase()}"`}
           />
           <CardLayout>
@@ -67,6 +66,7 @@ export const SearchPage = () => {
               </div>
             )}
           </CardLayout>
+
           {Object.keys(pagination)?.length > 0 && products?.length > 0 && (
             <PaginationWrapper
               paginationData={pagination}

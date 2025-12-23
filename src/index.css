@@ -135,6 +135,22 @@ html {
   display: none;
 }
 
+/* NProgress customization
+#nprogress .bar {
+  background: var(--primary) !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--primary), 0 0 5px var(--primary) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--primary) !important;
+  border-left-color: var(--primary) !important;
+}
+ */
+
 /* Swiper pagination  styles*/
 .mySwiper .swiper-pagination-bullet {
   background: var(--secondary);
@@ -157,23 +173,6 @@ html {
 }
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
-}
-
-@layer utilities {
-  @media (min-width: 1537px) {
-    .container {
-      max-width: 100%;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
-  @media (min-width: 1237px) {
-    .container {
-      max-width: 100%;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
 }
 
 /* Add the missing fall animation */

@@ -9,7 +9,7 @@ export const DashboardLayout = ({
 }) => {
   return (
     <ProtectRoute>
-      <BaseLayout isContainer={true}>
+      <BaseLayout isShowMegaMenu={false}>
         <section className="mb-10 md:mb-20 mt-10 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           <div className="hidden md:block col-span-1">
             <div className="sticky top-20">

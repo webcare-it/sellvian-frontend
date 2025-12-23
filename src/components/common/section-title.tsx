@@ -19,7 +19,7 @@ export const SectionTitle = ({
   return (
     <div
       className={`flex flex-wrap justify-between items-center md:gap-2 px-4 md:px-0 ${className}`}>
-      <h2 className="text-lg font-bold md:text-3xl lg:text-4xl text-primary tracking-tight flex justify-center">
+      <h2 className="text-lg font-bold md:text-3xl lg:text-4xl text-primary tracking-tight flex">
         {title}
       </h2>
 

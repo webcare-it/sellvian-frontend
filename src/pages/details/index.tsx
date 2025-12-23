@@ -41,7 +41,7 @@ export const ProductDetailsPage = () => {
   return (
     <>
       <ProductDetailsSeo product={product} />
-      <BaseLayout isContainer={true}>
+      <BaseLayout>
         <BreadcrumbWrapper
           className="my-10 mx-4 md:mx-auto"
           items={[
@@ -93,7 +93,7 @@ export const ProductDetailsPage = () => {
 
 export const ProductDetailsSkeleton = () => {
   return (
-    <BaseLayout isContainer={true}>
+    <BaseLayout>
       <div className="my-10 mx-4 md:mx-auto">
         <div className="flex items-center gap-2">
           <Skeleton className="h-4 w-16" />

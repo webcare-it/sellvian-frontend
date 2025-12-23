@@ -31,7 +31,7 @@ export const CartPage = () => {
   return (
     <>
       <SeoWrapper title="My Cart" />
-      <BaseLayout isContainer={true}>
+      <BaseLayout>
         <section className="mb-10 md:mb-20 mt-10">
           <HomeSectionTitle title="My Cart" />
           {cart?.items?.length === 0 ? (

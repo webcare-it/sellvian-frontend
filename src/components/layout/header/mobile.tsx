@@ -12,12 +12,11 @@ import { useSelector } from "react-redux";
 import type { RootStateType } from "@/redux/store";
 import { cn } from "@/lib/utils";
 import { UserProfile } from "./user";
+import { Logo } from "./logo";
+import { ActionSearchBar } from "./search";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { isPathActive } from "@/helper";
-import { Logo } from "@/components/layout/header/logo";
-import { SearchAction } from "./search";
-import { TrackIcon } from "./desktop";
 
 export const HeaderMobile = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -34,19 +33,10 @@ export const HeaderMobile = () => {
     setTriggerAnimation(true);
   };
 
-  useEffect(() => {
-    if (triggerAnimation) {
-      const timer = setTimeout(() => {
-        setTriggerAnimation(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [triggerAnimation]);
-
   const searchBar = useMemo(() => {
     return (
       <div className="flex-1">
-        <SearchAction ref={searchInputRef} />
+        <ActionSearchBar ref={searchInputRef} />
       </div>
     );
   }, []);
@@ -59,73 +49,96 @@ export const HeaderMobile = () => {
     }
   }, [isSearchOpen]);
 
+  useEffect(() => {
+    if (triggerAnimation) {
+      const timer = setTimeout(() => {
+        setTriggerAnimation(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [triggerAnimation]);
+
   return (
-    <nav
-      className={`md:hidden py-1 bg-primary backdrop-blur-3xl sticky top-0 left-0 right-0 z-[60]`}>
-      {triggerAnimation ? (
-        <AnimatePresence mode="wait">
-          {!isSearchOpen ? (
-            <motion.div
-              key="logo-section"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="flex items-center justify-between px-4">
-              <div>
-                <Logo type="MOBILE" />
-              </div>
-              <div className="flex justify-end items-center gap-4">
-                <Link to="/track-order">
-                  <TrackIcon height="20px" width="30px" />
-                </Link>
-                <button onClick={handleSearchClick}>
-                  <Search className="h-6 w-6 text-white font-bold" />
-                </button>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="search-section"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="flex items-center justify-between px-2 gap-2">
-              <ArrowLeft
-                onClick={handleBackClick}
-                className="h-6 w-6 text-white"
-              />
-              {searchBar}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      ) : !isSearchOpen ? (
-        <div className="flex items-center justify-between px-4">
-          <div>
-            <Logo type="MOBILE" />
+    <>
+      <nav
+        className={`md:hidden py-1 bg-background/95 backdrop-blur-3xl sticky top-0 left-0 right-0 z-[60] border-b border-border`}>
+        {triggerAnimation ? (
+          <AnimatePresence mode="wait">
+            {!isSearchOpen ? (
+              <motion.div
+                key="logo-section"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex items-center justify-between px-4">
+                <div>
+                  <Logo type="MOBILE" />
+                </div>
+                <div className="flex justify-end items-center gap-2.5">
+                  <button
+                    onClick={handleSearchClick}
+                    className="p-1 hover:bg-accent rounded-md transition-colors">
+                    <Search className="h-5 w-5 text-gray-900" />
+                  </button>
+                  <Link
+                    to="/track-order"
+                    className="p-1 hover:bg-accent rounded-md transition-colors">
+                    <TrackIcon height="20px" width="30px" />
+                  </Link>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="search-section"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="flex items-center justify-between px-4 gap-2">
+                <ArrowLeft
+                  onClick={handleBackClick}
+                  className="h-6 w-6 text-muted-foreground"
+                />
+                {searchBar}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        ) : !isSearchOpen ? (
+          <div className="flex items-center justify-between px-4">
+            <div>
+              <Logo type="MOBILE" />
+            </div>
+            <div className="flex justify-end items-center gap-2.5">
+              <button
+                onClick={handleSearchClick}
+                className="p-1 hover:bg-accent rounded-md transition-colors">
+                <Search className="h-5 w-5 text-gray-900" />
+              </button>
+              <Link
+                to="/track-order"
+                className="p-1 hover:bg-accent rounded-md transition-colors">
+                <TrackIcon height="20px" width="30px" />
+              </Link>
+            </div>
           </div>
-          <div className="flex justify-end items-center gap-4">
-            <Link to="/track-order">
-              <TrackIcon height="20px" width="30px" />
-            </Link>
-            <button onClick={handleSearchClick}>
-              <Search className="h-6 w-6 text-white font-bold" />
-            </button>
+        ) : (
+          <div className="flex items-center justify-between px-4 gap-2">
+            <ArrowLeft
+              onClick={handleBackClick}
+              className="h-6 w-6 text-muted-foreground"
+            />
+            {searchBar}
           </div>
-        </div>
-      ) : (
-        <div className="flex items-center justify-between px-2 gap-2">
-          <ArrowLeft onClick={handleBackClick} className="h-6 w-6 text-white" />
-          {searchBar}
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   );
 };
 
 export const FooterMobile = () => {
   const location = useLocation();
+
   const cart = useSelector((state: RootStateType) => state.cart.items);
   const wishlist = useSelector((state: RootStateType) => state.wishlist.items);
 
@@ -134,7 +147,7 @@ export const FooterMobile = () => {
       <nav className="bg-white border-t border-border">
         <div className="flex justify-around items-center py-1.5">
           <MenuItem activePath={location.pathname} href="/" icon={Home}>
-            Home
+            {"Home"}
           </MenuItem>
           <Link
             to="/categories"
@@ -154,7 +167,7 @@ export const FooterMobile = () => {
                   ? "text-primary"
                   : "text-foreground"
               )}>
-              Categories
+              {"Categories"}
             </span>
           </Link>
           <Link
@@ -164,12 +177,12 @@ export const FooterMobile = () => {
               <Handbag className="h-8 w-8 text-white" />
             </div>
             <span
-              className={`text-[10px] font-medium ${
+              className={`text-[10px] text-foreground font-medium ${
                 isPathActive(location.pathname, "/cart")
                   ? "text-primary"
                   : "text-foreground"
               }`}>
-              Cart ({cart?.length})
+              {"Cart"} ({cart?.length})
             </span>
           </Link>
 
@@ -195,7 +208,7 @@ export const FooterMobile = () => {
                   ? "text-primary"
                   : "text-foreground"
               }`}>
-              Wishlist
+              {"Wishlist"}
             </span>
           </Link>
           <div className="flex flex-col items-center justify-center min-w-0 flex-1">
@@ -241,5 +254,26 @@ const MenuItem = ({
         {children}
       </span>
     </Link>
+  );
+};
+
+export const TrackIcon = ({
+  height,
+  width,
+}: {
+  height: string;
+  width: string;
+}) => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      viewBox="0 0 640 512"
+      height={height}
+      width={width}
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 48C0 21.5 21.5 0 48 0L368 0c26.5 0 48 21.5 48 48l0 48 50.7 0c17 0 33.3 6.7 45.3 18.7L589.3 192c12 12 18.7 28.3 18.7 45.3l0 18.7 0 32 0 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0c0 53-43 96-96 96s-96-43-96-96l-128 0c0 53-43 96-96 96s-96-43-96-96l-16 0c-26.5 0-48-21.5-48-48L0 48zM416 256l128 0 0-18.7L466.7 160 416 160l0 96zM160 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm368-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM257 95c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l39 39L96 168c-13.3 0-24 10.7-24 24s10.7 24 24 24l166.1 0-39 39c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9L257 95z"></path>
+    </svg>
   );
 };

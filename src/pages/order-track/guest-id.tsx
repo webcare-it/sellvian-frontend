@@ -21,7 +21,7 @@ export const OrderTrackDetailsGuestPage = () => {
   return (
     <>
       <SeoWrapper title={"Order Track"} />
-      <BaseLayout isContainer={true}>
+      <BaseLayout isShowMegaMenu={false}>
         <section className="mb-10 md:mb-20 mt-10 px-4 md:px-0">
           <SectionTitle title={"Order Track"} />
 

@@ -117,7 +117,7 @@ export const SignUpForm = () => {
             {isPending ? (
               <>
                 <Spinner />
-                "Processing..."
+                Processing...
               </>
             ) : (
               "Sign up"

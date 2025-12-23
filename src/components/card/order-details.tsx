@@ -6,6 +6,7 @@ import { Contact, Eye, MapPin } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";
 import { keyToValue, slugify } from "@/helper";
+
 import { Skeleton } from "../common/skeleton";
 import { NoDataFound } from "../common/no-data-found";
 import { TooltipWrapper } from "../common/tooltip-wrapper";

@@ -1,6 +1,6 @@
 import type { ProductType } from "@/type";
 import { BaseLayout } from "@/components/layout/base-layout";
-import { HomeSectionTitle } from "@/components/common/section-title";
+import { SectionTitle } from "@/components/common/section-title";
 import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { AnimationWrapper } from "@/components/common/animation-wrapper";
@@ -26,9 +26,9 @@ export const ProductsSection = ({
   onPageChange,
 }: Props) => {
   return (
-    <BaseLayout isContainer={true}>
+    <BaseLayout>
       <section className="mb-10 md:mb-20 container mx-auto mt-10">
-        <HomeSectionTitle title={title} />
+        <SectionTitle title={title} />
         <CardLayout>
           {isLoading ? (
             Array.from({ length: 12 }).map((_, i) => (
@@ -46,7 +46,7 @@ export const ProductsSection = ({
               </AnimationWrapper>
             ))
           ) : (
-            <div className="w-full px-4 md:px-5">
+            <div className="w-full">
               <NoDataFound title={"No products found"} />
             </div>
           )}

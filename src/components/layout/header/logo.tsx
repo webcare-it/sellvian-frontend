@@ -17,10 +17,10 @@ export const Logo = ({ type }: Props) => {
           <img
             src={getImageUrl(logo as string)}
             alt="logo"
-            className="absolute w-full h-full object-contain"
             onError={(e) => {
               e.currentTarget.src = "/placeholder.svg";
             }}
+            className="absolute w-full h-full object-contain"
           />
         </div>
       </Link>
@@ -33,10 +33,10 @@ export const Logo = ({ type }: Props) => {
         <img
           src={getImageUrl(logo as string)}
           alt="logo"
-          className="w-full h-20 object-contain"
           onError={(e) => {
             e.currentTarget.src = "/placeholder.svg";
           }}
+          className="w-full h-20 object-contain"
         />
       </Link>
     );

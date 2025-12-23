@@ -9,13 +9,12 @@ import {
   Search,
 } from "lucide-react";
 import { getImageUrl, slugify } from "@/helper";
-
 import { Input } from "@/components/ui/input";
 import type {
   CategoryType,
   SubCategoryType,
   SubSubCategoryType,
-} from "../layout/sidebar";
+} from "@/components/layout/header/useMenu";
 import { OptimizedImage } from "../common/optimized-image";
 
 interface Props {
@@ -54,7 +53,7 @@ const CategoryItem = ({ category, level }: CategoryItemProps) => {
           className="flex-1 flex items-center gap-1">
           <div className="w-12 h-12 rounded overflow-hidden flex-shrink-0 bg-muted">
             <OptimizedImage
-              src={category?.icon || ""}
+              src={getImageUrl(category.icon)}
               alt={category.name}
               className="w-full h-full object-cover"
             />

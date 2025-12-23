@@ -28,8 +28,8 @@ const PromotionalSection = ({
   if (!items || items?.length === 0) return null;
 
   return (
-    <div className="w-full px-2 md:px-5">
-      {isShowTitle && <HomeSectionTitle title={"Flash Deal"} />}
+    <div className="w-full px-2 md:px-0">
+      {isShowTitle && <HomeSectionTitle title="Flash Deal" />}
       <Swiper
         spaceBetween={30}
         effect={"fade"}
@@ -56,7 +56,7 @@ interface Props {
 }
 export const FlashDealSection = ({ isLoading, banners }: Props) => {
   const items = banners?.map((b) => ({
-    image: b?.banner,
+    image: b.banner,
     link: `/flash-deal/${b?.id}/${slugify(b?.title)}`,
   }));
 

@@ -83,6 +83,7 @@ export const PaymentMethods = () => {
                           alt={payment.name}
                           className="w-8 h-8 object-contain"
                         />
+
                         <h4 className="text-sm md:text-base font-medium text-foreground">
                           {payment?.title || payment?.name}
                         </h4>

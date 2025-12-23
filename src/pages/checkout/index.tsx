@@ -52,7 +52,7 @@ export const CheckoutPage = () => {
   return (
     <>
       <SeoWrapper title="Your Checkout" />
-      <BaseLayout isContainer={true}>
+      <BaseLayout>
         <section className="mb-10 md:mb-20 mt-10">
           <SectionTitle title="Checkout" />
           {cart?.items?.length === 0 ? (

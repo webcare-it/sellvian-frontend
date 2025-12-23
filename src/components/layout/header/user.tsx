@@ -1,5 +1,7 @@
-import { User, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
+import { Button } from "../../ui/button";
 import { Link, useLocation } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { useGetUserQuery } from "@/api/queries/useUser";
 import {
   getGuestUserId,
@@ -8,11 +10,11 @@ import {
   isAuthenticated,
 } from "@/helper";
 import { useEffect } from "react";
+
 import { cn } from "@/lib/utils";
+import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { ProfileCard } from "@/components/card/profile";
 import type { UserType } from "@/type";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 interface Props {
   variant?: "desktop" | "mobile";
@@ -22,10 +24,13 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
   const location = useLocation();
   const { data } = useGetUserQuery();
   const user = data?.user as unknown as UserType;
+
   useEffect(() => {
     if (!getGuestUserId() && !isAuthenticated()) {
       const guestUserId = getUUID();
-      localStorage.setItem("guest_user_id", guestUserId);
+      setTimeout(() => {
+        localStorage.setItem("guest_user_id", guestUserId);
+      }, 5000);
     }
   }, []);
 
@@ -33,20 +38,24 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
 
   const Desktop = () => {
     return (
-      <Link to={linkTo}>
-        {isAuthenticated() ? (
-          <Avatar className="size-9 rounded-full">
-            <AvatarImage src={getProfileImage(user)} />
-            <AvatarFallback className="text-black">
-              {user?.name?.charAt(0) || "U"}
-            </AvatarFallback>
-          </Avatar>
-        ) : (
-          <div className="relative p-2.5 bg-white rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-black font-medium" />
-          </div>
-        )}
-      </Link>
+      <Button
+        variant="ghost"
+        size="icon-lg"
+        className={cn("focus:outline-none rounded-full! overflow-hidden")}
+        asChild>
+        <Link to={linkTo}>
+          {isAuthenticated() ? (
+            <Avatar className="border border-primary rounded-full">
+              <AvatarImage src={getProfileImage(user)} />
+              <AvatarFallback className="text-primary">
+                {user?.name?.charAt(0) || "U"}
+              </AvatarFallback>
+            </Avatar>
+          ) : (
+            <UserRound className="h-6 w-6" />
+          )}
+        </Link>
+      </Button>
     );
   };
 
@@ -71,7 +80,7 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
                     ? "text-primary"
                     : "text-foreground"
                 )}>
-                Account
+                {"Account"}
               </span>
             </button>
           </SheetTrigger>
@@ -88,7 +97,7 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
         className="flex flex-col items-center justify-center min-w-0 flex-1">
         <UserRound className={cn("h-5 w-5 mb-1 text-foreground")} />
         <span className={cn("text-[10px] font-medium text-foreground")}>
-          Account
+          {"Account"}
         </span>
       </Link>
     );

@@ -1,6 +1,6 @@
 import { useGetProductsByBrand } from "@/api/queries/useProducts";
-import type { PaginationDataType } from "@/components/common/pagination-wrapper";
 import { ProductsSection } from "@/components/card/products-section";
+import type { PaginationDataType } from "@/components/common/pagination-wrapper";
 import { SeoWrapper } from "@/components/common/seo-wrapper";
 import { slugifyToTitle } from "@/helper";
 import type { ProductType } from "@/type";
@@ -27,8 +27,8 @@ export const BrandsPage = () => {
       <ProductsSection
         title={slugifyToTitle(name as string)}
         products={products}
-        onPageChange={handlePageChange}
         pagination={paginationData}
+        onPageChange={handlePageChange}
         isLoading={isLoading}
       />
     </>

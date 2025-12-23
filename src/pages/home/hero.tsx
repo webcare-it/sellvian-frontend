@@ -22,7 +22,7 @@ export const HeroSection = () => {
   const banners = items?.length > 0 ? items : placeholder;
 
   return (
-    <div className="w-full mt-2 px-2 md:px-5">
+    <div className="w-full mt-2 px-2 md:px-0">
       <div className="relative">
         <button className="prev-btn absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1 md:p-2 rounded-full bg-primary/10 text-primary cursor-pointer border border-primary/40">
           <ChevronLeft className="size-4 md:size-6" />

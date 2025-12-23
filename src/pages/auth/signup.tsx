@@ -15,13 +15,13 @@ export const SignUpPage = () => {
   return (
     <>
       <SeoWrapper title="Sign up" />
-      <BaseLayout>
-        <section className="flex items-center justify-center">
-          <div className="flex w-full max-w-lg flex-col gap-6 mt-10 px-4 md:px-0">
+      <BaseLayout isShowMegaMenu={false}>
+        <section className="flex justify-center items-center my-10">
+          <div className="flex w-full max-w-lg flex-col gap-6">
             <div className={cn("flex flex-col gap-6")}>
-              <Card>
+              <Card className="mx-4 md:mx-0">
                 <CardHeader className="flex gap-2 flex-col items-center justify-center">
-                  <div className="text-center mt-8">
+                  <div className="text-center mt-4">
                     <CardTitle className="text-xl">Welcome</CardTitle>
                     <CardDescription>Sign up to your account</CardDescription>
                   </div>

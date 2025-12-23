@@ -20,7 +20,7 @@ export const useIsMobile = () => {
   return !!isMobile;
 };
 
-const TABLET_BREAKPOINT = 1500;
+const TABLET_BREAKPOINT = 1440;
 
 export const useIsTablet = () => {
   const [isTablet, setIsTablet] = React.useState<boolean | undefined>(
@@ -30,10 +30,10 @@ export const useIsTablet = () => {
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${TABLET_BREAKPOINT}px)`);
     const onChange = () => {
-      setIsTablet(window.innerWidth - 320 <= TABLET_BREAKPOINT);
+      setIsTablet(window.innerWidth <= TABLET_BREAKPOINT);
     };
     mql.addEventListener("change", onChange);
-    setIsTablet(window.innerWidth - 320 <= TABLET_BREAKPOINT);
+    setIsTablet(window.innerWidth <= TABLET_BREAKPOINT);
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
